@@ -30,7 +30,7 @@ class business_contact(card):
     def __init__(self, name, surname, company, position, email, business_phone_number):
         super().__init__(name, surname, company, position, email)
         self.business_phone_number = business_phone_number
-        self._name_length = 0
+        self._name_length = None
     def contact(self):
         print("Kontakuję sie z " + str(self.business_phone_number))    
     @property
@@ -44,5 +44,6 @@ class business_contact(card):
         print(self._name_length)
 
  
-p = business_contact(name="Dawid", surname="Płosiński", email="dplosinski97@gmail.com", company="af", position="senior", business_phone_number=123456798)
-p.name_length
+p = business_contact(name="Dawid", surname="Kowalski", email="dplosinski97@gmail.com", company="Amazon", position="senior", business_phone_number=123456798)
+p.name_length #Dlaczego printuje sie None
+p.name_length = "Dawid" #Dlaczego printuje sie 14
