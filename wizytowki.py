@@ -1,3 +1,7 @@
+from faker import Faker
+
+fake = Faker()
+
 class card:
     def __init__(self, name, surname, company, position, email):
         self.name = name
@@ -19,31 +23,37 @@ class base_contact(card):
         print("Kontakuję sie z " + str(self.phone_number))
     @property
     def name_length(self):
-        return self._name_length
-    @name_length.setter
-    def name_length(self, length):
-        length = len(self.name) + len(self.surname)
-        self._name_length = length
+        _name_length = len(self.name) + len(self.surname)
+        print(_name_length)
 
 
 class business_contact(card):
     def __init__(self, name, surname, company, position, email, business_phone_number):
         super().__init__(name, surname, company, position, email)
         self.business_phone_number = business_phone_number
-        self._name_length = None
+        self._name_length = 0
     def contact(self):
         print("Kontakuję sie z " + str(self.business_phone_number))    
     @property
     def name_length(self):
-        print(self._name_length)
-        return self._name_length
-    @name_length.setter
-    def name_length(self, length):
-        length = len(self.name) + len(self.surname)
-        self._name_length = length
-        print(self._name_length)
+        _name_length = len(self.name) + len(self.surname)
+        print(_name_length)
 
- 
-p = business_contact(name="Dawid", surname="Kowalski", email="dplosinski97@gmail.com", company="Amazon", position="senior", business_phone_number=123456798)
-p.name_length #Dlaczego printuje sie None
-p.name_length = "Dawid" #Dlaczego printuje sie 14
+def create_contacts(type, number):
+    empty = []
+    for i in range(0, number):
+        if type == 'business':
+            first_name = fake.first_name()
+            last_name = fake.last_name()
+            emails = fake.email()
+            business_phone_numbers = fake.phone_number()
+            positions = fake.job()
+            companies = fake.company()
+            i = business_contact(name = first_name, surname=last_name, email=emails, business_phone_number=business_phone_numbers, position=positions, company=companies)
+            empty.append(i)
+    print(empty)
+
+create_contacts('business', 5)
+
+p = business_contact(name="Dawid", surname="Płosiński", email="dplosinski97@gmail.com", company="af", position="senior", business_phone_number=123456798)
+p.name_length
