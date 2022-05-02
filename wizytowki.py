@@ -57,5 +57,5 @@ def create_contacts(type, number):
 
 create_contacts('business', 5)
 
-p = business_contact(name="Dawid", surname="Płosiński", email="dplosinski97@gmail.com", company="af", position="senior", business_phone_number=123456798)
+p = business_contact(name="Dawid", surname="Kowalski", email="kowalski@gmail.com", company="af", position="senior", business_phone_number=123456798)
 p.name_length
