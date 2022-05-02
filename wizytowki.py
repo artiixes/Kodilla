@@ -32,8 +32,10 @@ class business_contact(card):
         super().__init__(name, surname, company, position, email)
         self.business_phone_number = business_phone_number
         self._name_length = 0
+    def __repr__(self):
+        return f'business_contact("{self.name}", "{self.surname}", "{self.company}", "{self.position}", "{self.email}", "{self.business_phone_number}")'
     def contact(self):
-        print("Kontakuję sie z " + str(self.business_phone_number))    
+        print("Kontakuję sie z " + str(self.business_phone_number))
     @property
     def name_length(self):
         _name_length = len(self.name) + len(self.surname)
