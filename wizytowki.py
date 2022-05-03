@@ -2,7 +2,7 @@ from faker import Faker
 
 fake = Faker()
 
-class card:
+class Card:
     def __init__(self, name, surname, company, position, email):
         self.name = name
         self.surname = surname
@@ -13,13 +13,13 @@ class card:
         return f'{self.name} {self.surname} {self.company} {self.position} {self.email}'
 
 
-class base_contact(card):
+class Base_contact(Card):
     def __init__(self, name, surname, company, position, email, phone_number):
         super().__init__(name, surname, company, position, email)
         self.phone_number = phone_number
         self._name_length = 0
     def __repr__(self):
-        return f'base_contact("{self.name}", "{self.surname}", "{self.company}", "{self.position}", "{self.email}", "{self.phone_number}")'
+        return f'Base_contact("{self.name}", "{self.surname}", "{self.company}", "{self.position}", "{self.email}", "{self.phone_number}")'
 
     def contact(self):
         print("Kontakuję sie z " + str(self.phone_number))
@@ -29,13 +29,13 @@ class base_contact(card):
         print(_name_length)
 
 
-class business_contact(card):
+class Business_contact(Card):
     def __init__(self, name, surname, company, position, email, business_phone_number):
         super().__init__(name, surname, company, position, email)
         self.business_phone_number = business_phone_number
         self._name_length = 0
     def __repr__(self):
-        return f'business_contact("{self.name}", "{self.surname}", "{self.company}", "{self.position}", "{self.email}", "{self.business_phone_number}")'
+        return f'Business_contact("{self.name}", "{self.surname}", "{self.company}", "{self.position}", "{self.email}", "{self.business_phone_number}")'
     def contact(self):
         print("Kontakuję sie z " + str(self.business_phone_number))
     @property
@@ -53,7 +53,7 @@ def create_contacts(type, number):
             business_phone_numbers = fake.phone_number()
             positions = fake.job()
             companies = fake.company()
-            i = business_contact(name = first_name, surname=last_name, email=emails, business_phone_number=business_phone_numbers, position=positions, company=companies)
+            i = Business_contact(name = first_name, surname=last_name, email=emails, business_phone_number=business_phone_numbers, position=positions, company=companies)
             empty.append(i)
         elif type == 'base':
             first_name = fake.first_name()
@@ -62,13 +62,13 @@ def create_contacts(type, number):
             phone_numbers = fake.phone_number()
             positions = fake.job()
             companies = fake.company()
-            i = base_contact(name = first_name, surname=last_name, email=emails, phone_number=phone_numbers, position=positions, company=companies)
+            i = Base_contact(name = first_name, surname=last_name, email=emails, phone_number=phone_numbers, position=positions, company=companies)
             empty.append(i)
             
     print(empty)
 
-create_contacts('business', 5)
-create_contacts('base', 5)
+create_contacts('business', 1)
+create_contacts('base', 1)
 
-p = business_contact(name="Dawid", surname="Płosiński", email="dplosinski97@gmail.com", company="af", position="senior", business_phone_number=123456798)
+p = Business_contact(name="Dawid", surname="Płosiński", email="dplosinski97@gmail.com", company="af", position="senior", business_phone_number=123456798)
 p.name_length
