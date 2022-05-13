@@ -1,14 +1,16 @@
 import random
 from faker import Faker
-
 fake = Faker()
 
+genre = ['Action', 'Romanse', 'Sport', 'Horror', 'Thriller', 'Adventure', 'Documentary']
+
 class Library:
-    def __init__(self, title, release_date, genre, views):
+    def __init__(self, title, release_date, genre, views, type):
         self.title = title
         self.release_date = release_date
         self.genre = genre
         self.views = views
+        self.type = type
 
     def play(self, views):
         views += 1
@@ -51,16 +53,15 @@ def List_of_movies_and_series(number):
         else:
             type = 'series'       
         if type == 'movie':
-            genre = ['Action', 'Romanse', 'Sport', 'Horror', 'Thriller', 'Adventure', 'Documentary']
             a = random.randrange(0, 7)
             titles = fake.word()
             release_dates = fake.date()
             genres = genre[a]
             viewss = fake.pyint()
-            i = Movies(title=titles, release_date=release_dates, genre=genres, views=viewss)
+            types = "movie"
+            i = Movies(title=titles, release_date=release_dates, genre=genres, views=viewss, type=types)
             empty.append(i)
         elif type == 'series':
-            genre = ['Action', 'Romanse', 'Sport', 'Horror', 'Thriller', 'Adventure', 'Documentary']
             a = random.randrange(0, 7)
             b = random.randrange(0, 100)
             c = random.randrange(0, 100)
@@ -70,14 +71,19 @@ def List_of_movies_and_series(number):
             viewss = fake.pyint()
             episodes = b
             seasons = c
-            i = Series(title=titles, release_date=release_dates, genre=genres, views=viewss, episode=episodes, season=seasons)
+            types = "series"
+            i = Series(title=titles, release_date=release_dates, genre=genres, views=viewss, episode=episodes, season=seasons, type=types)
             empty.append(i)
-    print(empty)
     for j in empty:
         print(j)
 
+def get_movies(m):
+    movie = []
+    for i in m:
+        if i.type=="movie":
+            movie.append(i)
+    print(movie)
+                        
 
-List_of_movies_and_series(5)
-
-sim = Series(title="The Simpsons", release_date=1999, genre="action", views=55 ,season=10, episode=5)
-pulp = Movies(title="Pulp Fiction", release_date=1994, genre="Romantic", views=90)
+a = List_of_movies_and_series(5)
+get_movies
